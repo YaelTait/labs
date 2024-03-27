@@ -1,4 +1,6 @@
 pragma solidity >=0.6.12 <0.9.0;
+import "forge-std/console.sol";
+
 /***Getting authorized withdrawers in the constructor:**
 
 Pros:
@@ -36,9 +38,7 @@ contract Gabaim {
     event Withdrawal(address indexed recipient, uint256 amount);
     
     address private owner;
-    address private authorizedWithdrawer1;
-    address private authorizedWithdrawer2;
-    address private authorizedWithdrawer3;
+    address[3] private authorizedWithdrawers;
 
     constructor() {
         owner = msg.sender;
@@ -66,40 +66,24 @@ contract Gabaim {
 
     // Function to check if an address is authorized to withdraw
     function isAuthorized(address _address) private view returns (bool) {
-        return (_address == owner || _address == authorizedWithdrawer1 || _address == authorizedWithdrawer2 || _address == authorizedWithdrawer3);
+        return (_address == owner ||
+                _address == authorizedWithdrawers[0] ||
+                _address == authorizedWithdrawers[1] ||
+                _address == authorizedWithdrawers[2]);
     }
 
-   // Function to set or update the authorized withdrawer 1
-    function setAuthorizedWithdrawer1(address _authorizedWithdrawer1) public {
-        require(msg.sender == owner, "Only the owner can set authorized withdrawer 1");
-        require(_authorizedWithdrawer1 != address(0), "Authorized withdrawer cannot be zero address");
-        authorizedWithdrawer1 = _authorizedWithdrawer1;
+    // Function to set or update the authorized withdrawer
+    function setAuthorizedWithdrawer(address _authorizedWithdrawer, uint _index) public {
+        require(msg.sender == owner, "Only the owner can set authorized withdrawer");
+        require(_authorizedWithdrawer != address(0), "Authorized withdrawer cannot be zero address");
+        require(_index >= 0 && _index < 3, "Invalid index");
+        
+        authorizedWithdrawers[_index] = _authorizedWithdrawer;
     }
 
-    // Function to set or update the authorized withdrawer 2
-    function setAuthorizedWithdrawer2(address _authorizedWithdrawer2) public {
-        require(msg.sender == owner, "Only the owner can set authorized withdrawer 2");
-        require(_authorizedWithdrawer2 != address(0), "Authorized withdrawer cannot be zero address");
-        authorizedWithdrawer2 = _authorizedWithdrawer2;
+    // Function to get authorized withdrawer address at a specific index
+    function getAuthorizedWithdrawer(uint _index) public view returns (address) {
+        require(_index >= 0 && _index < 3, "Index out of bounds");
+        return authorizedWithdrawers[_index];
     }
-
-    // Function to set or update the authorized withdrawer 3
-    function setAuthorizedWithdrawer3(address _authorizedWithdrawer3) public {
-        require(msg.sender == owner, "Only the owner can set authorized withdrawer 3");
-        require(_authorizedWithdrawer3 != address(0), "Authorized withdrawer cannot be zero address");
-        authorizedWithdrawer3 = _authorizedWithdrawer3;
-    }
-
-    function getAuthorizedWithdrawer1() public view returns (address) {
-    return authorizedWithdrawer1;
-}
-
-function getAuthorizedWithdrawer2() public view returns (address) {
-    return authorizedWithdrawer2;
-}
-
-function getAuthorizedWithdrawer3() public view returns (address) {
-    return authorizedWithdrawer3;
-}
-
 }

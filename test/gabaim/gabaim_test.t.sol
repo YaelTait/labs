@@ -1,5 +1,5 @@
 pragma solidity >=0.6.12 <0.9.0;
-import "@hack/gabaim.sol";
+import "@hack/gabaim/gabaim.sol";
 import "foundry-huff/HuffDeployer.sol";
 import "forge-std/Test.sol";
 import "forge-std/console.sol";
@@ -19,10 +19,11 @@ contract GabaimTest is Test {
         // Arrange
         uint256 initialBalance = address(gabaim).balance;
         uint256 depositAmount = 100 wei;
-        
+    
         // Act
         payable(address(gabaim)).transfer(depositAmount);
         
+
         // Assert
         assertEq(address(gabaim).balance, initialBalance + depositAmount, "Contract balance should increase by deposit amount");
     }
@@ -30,15 +31,22 @@ contract GabaimTest is Test {
 
     function testWithdraw() public {
         // Arrange
+
+        uint256 withdrawAmount = 50;
+        address pullerAddress = vm.addr(123);   
+        payable(address(gabaim)).transfer(10000);
         uint256 initialBalance = address(gabaim).balance;
-        uint256 withdrawalAmount = 50 wei;
-        payable(address(gabaim)).transfer(withdrawalAmount);
-        
-        // Act
-        gabaim.withdraw(withdrawalAmount);
-        
-        // Assert
-        assertEq(address(gabaim).balance, initialBalance, "Contract balance should decrease by withdrawal amount");
+        gabaim.setAuthorizedWithdrawer(pullerAddress,1);
+
+        //Act
+
+        vm.startPrank(pullerAddress); // send from random address
+        gabaim.withdraw(withdrawAmount);
+        vm.stopPrank();
+
+        //Assert
+        uint256 finalBalance = address(gabaim).balance; // the balance in the final (after transfer)
+        assertEq(finalBalance, initialBalance - withdrawAmount);
     }
     
 
@@ -58,11 +66,12 @@ contract GabaimTest is Test {
         address withdrawer = address(0x123);
         
         // Act
-        gabaim.setAuthorizedWithdrawer1(withdrawer);
+        gabaim.setAuthorizedWithdrawer(withdrawer,1);
         
         // Assert
-        assertEq(gabaim.getAuthorizedWithdrawer1(), withdrawer, "Authorized withdrawer 1 should be set");
+        assertEq(gabaim.getAuthorizedWithdrawer(1), withdrawer, "Authorized withdrawer 1 should be set");
     }
+
     function testUnauthorizedWithdraw() public {
     // Arrange
     address unauthorizedUser = vm.addr(1234); // Replace with an unauthorized address
