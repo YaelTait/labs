@@ -45,7 +45,7 @@ function calcRewards(uint _amount) public view returns (uint) {
     uint reward = (_amount * rewardPool) / TOTAL_DEPOSITS;
     return reward;
 }
-
+//comm
     function withdrawWithReward(uint _amount) external {
         require(_amount > 0, "Amount must be greater than 0");
         uint balanceWithReward = getBalanceWithReward(msg.sender);
