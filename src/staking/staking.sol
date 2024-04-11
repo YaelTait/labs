@@ -1,17 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
 import "forge-std/console.sol";
-contract Reward_4_7 is ERC20 {
+import "@hack/staking/MyToken.sol";
+contract Reward_4_7{
     address public owner;
-    uint private REWARD_AMOUNT ; // 1 million reward tokens
-    //uint private constant SEVEN_DAYS_IN_SECONDS = 7 days;
-    uint private TOTAL_DEPOSITS = 0;
+    uint public REWARD_AMOUNT ; // 1 million reward tokens
+    uint public TOTAL_DEPOSITS = 0;
     uint WAD = 10000000000;
+    uint BPS=10000;
     uint PERCENT;
-    //uint DATE=1750140800;
+    MyToken myToken;
     // Struct to hold deposit information
     struct Deposit {
         uint timestamp;
@@ -19,11 +17,12 @@ contract Reward_4_7 is ERC20 {
     }
     // Mapping from user address to array of deposits
     mapping(address => Deposit[]) private userDeposits;
-    constructor(uint reward,uint percent) ERC20("Reward_4_7", "RWD_4_7") {
+    constructor(uint reward,uint percent,address token)  {
         REWARD_AMOUNT=reward;
         PERCENT=percent;
         owner = msg.sender;
-        _mint(address(this), REWARD_AMOUNT);
+        myToken= MyToken(token);
+        myToken.mint( REWARD_AMOUNT);
     }
     modifier onlyOwner() {
         require(msg.sender == owner, "Not authorized");
@@ -31,15 +30,17 @@ contract Reward_4_7 is ERC20 {
     }
     function deposit(uint _amount) external {
         require(_amount > 0, "Amount must be greater than 0");
-        transferFrom(msg.sender, address(this), _amount);
+        console.log("address 1" , (msg.sender));
+        myToken.transferFrom(msg.sender, address(myToken), _amount);
         userDeposits[msg.sender].push(Deposit(block.timestamp, _amount));
+    console.log("sssssssss",msg.sender);
         TOTAL_DEPOSITS += _amount;
     }
     function calcRewards(uint _amount) public view returns (uint) {
-        if (TOTAL_DEPOSITS == 0) return 0;
-        uint rewardPool = (REWARD_AMOUNT * PERCENT * WAD) / 100; // PERCENT% of the reward pool
-        uint reward = (_amount * rewardPool) / TOTAL_DEPOSITS;
-        return reward;
+        console.log(msg.sender,"calc");
+      if (TOTAL_DEPOSITS == 0) return 0;
+     
+      return  REWARD_AMOUNT*WAD*(PERCENT/100)*(_amount/TOTAL_DEPOSITS)/WAD;
     }
     function withdraw(uint _amount) external {
         require(_amount > 0, "Amount must be greater than 0");
@@ -49,7 +50,7 @@ contract Reward_4_7 is ERC20 {
             "Insufficient available amount for withdrawal with rewards"
         );
         uint reward = calcRewards(_amount);
-        transferFrom(address(this), msg.sender, _amount + reward);
+        myToken.transfer(msg.sender, _amount + reward);
         REWARD_AMOUNT -= reward;
         TOTAL_DEPOSITS -= _amount;
         uint remainingAmount = _amount;
@@ -79,21 +80,16 @@ contract Reward_4_7 is ERC20 {
     }
     function getBalanceWithReward(address _account) public view returns (uint) {
         uint sum = 0;
-        console.log(block.timestamp);
-        console.log(7 days);
-        uint latestDate = block.timestamp - 7*24*60*60;
+      console.log("hrrrrrrrrru", _account);
+        //console.log(7 days);
+        uint latestDate = block.timestamp - 7 days;
         for (uint i = 0; i < userDeposits[_account].length; i++) {
-            if (i< latestDate) {
+            console.log("@@@",userDeposits[_account][i].amount);
+
+            if (userDeposits[_account][i].timestamp< latestDate) {
                 sum += userDeposits[_account][i].amount;
             }
         }
         return sum;
     }
-    function getTotalBalance() public view returns (uint) {
-        return balanceOf(msg.sender);
-    }
-    function mint(uint ammount) public {
-        _mint(msg.sender, ammount);
-    }
-    //hi!
 }

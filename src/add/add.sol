@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.6;
+import "forge-std/console.sol";
 
 contract Add {
     constructor() {}
 
-    function addTwo(uint256 x, uint256 y) public pure returns (uint256) {
+    function addTwo(uint256 x, uint256 y) public  returns (uint256) {
+        console.log("add",msg.sender);
         return x + y;
     }
 }
