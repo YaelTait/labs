@@ -95,4 +95,5 @@ contract Reward_4_7 is ERC20 {
     function mint(uint ammount) public {
         _mint(msg.sender, ammount);
     }
+    //hi!
 }
