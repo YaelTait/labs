@@ -24,7 +24,7 @@ contract TestReward is Test {
             "Initial balance should be 1 million tokens"
         );
     }
-    function testDeposit1() public {
+    function testDeposit() public {
         uint initialBalance = reward.REWARD_AMOUNT()+reward.TOTAL_DEPOSITS();
         myToken.mint(200);
         myToken.approve(address(reward), 100);
