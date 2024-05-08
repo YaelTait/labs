@@ -5,7 +5,7 @@ import "@hack/AMM/MyToken.sol"; // Importing your token contract
 import "src/AMM/cp.sol";
 import "foundry-huff/HuffDeployer.sol";
 import "forge-std/console.sol";
-contract AmmTest is Test {
+contract SwapTest is Test {
     CP public amm; // Your AMM contract
     MyToken public token0;
     MyToken public token1;
@@ -19,7 +19,7 @@ contract AmmTest is Test {
     function testValidSwap() public {
         uint swapAmount = 100;
         // Mint tokens for user1
-       address user1 = address(0x123); // Set up user1 address
+        address user1 = address(0x123); // Set up user1 address
         // Approve the contract to spend the required tokens
         vm.startPrank(user1);
         token0.approve(address(amm), 20000); // Ensure approval to the correct contract
