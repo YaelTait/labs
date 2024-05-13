@@ -62,7 +62,7 @@ contract NFTAuction {
         }
     }
 
-    function addQuote() public payable {
+    function addBid() public payable {
         console.log("user", msg.sender, "amount", msg.value);
         require(started && block.timestamp < endingBid, "the Auction is closed");
         
@@ -82,14 +82,14 @@ contract NFTAuction {
         console.log("userrr", msg.sender, "amount", msg.value);
     }
 
-    function cancelQuote() public {
+    function cancelBid() public {
         require(started && block.timestamp < endingBid, "the Auction is closed");
         require(balances[address(msg.sender)].isExist, "you are not exist");
         balances[address(msg.sender)].isExist = false;
         payable(msg.sender).transfer(balances[address(msg.sender)].amount);
     }
 
-    function returnQuotes() public {
+    function transferMoneyToBidders() public payable {
         require(block.timestamp > endingBid, "the Auction is active");
         updateMax();
         for (uint i = 0; i < maxStack.length - 1; i++) {
@@ -108,7 +108,7 @@ contract NFTAuction {
         return (balances[msg.sender].isExist);
     }
 
-    function end() onlyOwner external {
+    function end() onlyOwner external payable {
         require(block.timestamp > endingBid, "the Auction is active");
         if (maxStack.length < 1) {
             nftToken.transferFrom(address(this), owner, tokenId);
@@ -117,7 +117,7 @@ contract NFTAuction {
             payable(address(owner)).transfer(amount);
             address bidderAddress = maxStack[maxStack.length - 1]._address;
             nftToken.transferFrom(address(this), bidderAddress, tokenId);
-            returnQuotes();
+            transferMoneyToBidders();
             started = false;
         }
     }
