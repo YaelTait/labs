@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
-import "@hack/AMM/MyToken.sol";
+import "@hack/amm/MyToken.sol";
 import "forge-std/console.sol";
 // constant product
 contract CP {

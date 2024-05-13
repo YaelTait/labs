@@ -1,7 +1,7 @@
 pragma solidity ^0.8.0;
 
-import "src/NFT/myToken.sol";
-import "src/NFT/nftAuction.sol";
+import "src/nft/myToken.sol";
+import "src/nft/nftAuction.sol";
 import "foundry-huff/HuffDeployer.sol";
 import "forge-std/Test.sol";
 import "forge-std/console.sol";
@@ -36,28 +36,28 @@ contract NFTAuctionTest is Test {
         assertEq(erc721.ownerOf(tokenId), address(nft));
     }
 
-    // Test function to add a quote to the auction
-    function testAddQuote() public {
+    // Test function to add a Bid to the auction
+    function testAddBid() public {
         address addr = vm.addr(12345);
         vm.startPrank(addr);
         vm.deal(address(addr), 5000);
-        uint256 quoteAmount = 150; // Higher than the starting price
-        nft.addQuote{value: quoteAmount}();
-        // Assert the state after adding a quote
+        uint256 bidAmount = 150; // Higher than the starting price
+        nft.addBid{value: bidAmount}();
+        // Assert the state after adding a Bid
         (address maxStackAddress, uint256 maxStackAmount) = nft.getMaxStack();
         assertEq(maxStackAddress, address(addr), "Unexpected maxStackAddress");
-        assertEq(maxStackAmount, quoteAmount, "Unexpected maxStackAmount");
+        assertEq(maxStackAmount, bidAmount, "Unexpected maxStackAmount");
     }
 
-    // Test function to cancel a quote from the auction
-    function testCancelQuote() public {
+    // Test function to cancel a Bid from the auction
+    function testCancelBid() public {
         address addr = vm.addr(12345);
         vm.startPrank(addr);
         vm.deal(address(addr), 5000);
-        uint256 quoteAmount = 150; // Higher than the starting price
-        nft.addQuote{value: quoteAmount}();
-        nft.cancelQuote();
-        // Assert the state after canceling the quote
+        uint256 bidAmount = 150; // Higher than the starting price
+        nft.addBid{value: bidAmount}();
+        nft.cancelBid();
+        // Assert the state after canceling the Bid
         assert(!nft.getIsExist());
     }
 
@@ -67,8 +67,8 @@ contract NFTAuctionTest is Test {
         address addr = vm.addr(12345);
         vm.startPrank(addr);
         vm.deal(address(addr), 5000);
-        uint256 quoteAmount = 150; // Higher than the starting price
-        nft.addQuote{value: quoteAmount}();
+        uint256 bidAmount = 150; // Higher than the starting price
+        nft.addBid{value: bidAmount}();
         vm.warp(124); // Fast forward time to simulate end of auction
         vm.stopPrank();
         vm.startPrank(owner);

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import "forge-std/console.sol";
-import "@hack/AMM/MyToken.sol";
+import "@hack/amm/MyToken.sol";
 contract ConstantSumAMM {
     address public owner;
     uint public balanceA;

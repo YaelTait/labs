@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 import "forge-std/Test.sol"; // Assuming you're using Foundry/Hardhat for testing
-import "@hack/AMM/MyToken.sol"; // Importing your token contract
-import "src/AMM/cp.sol";
+import "@hack/amm/MyToken.sol"; // Importing your token contract
+import "src/amm/cp.sol";
 import "foundry-huff/HuffDeployer.sol";
 import "forge-std/console.sol";
 contract SwapTest is Test {
