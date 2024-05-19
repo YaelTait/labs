@@ -35,7 +35,6 @@ method joins() {
     assert s2 - s3 == {3};        // diffference
     assert s2 - s4 == {1,2};      // difference
 }
-
 // note that because sets can only contain at most one of each element,
 // the union does not count repeated elements more than once.
 // These operators will result in a finite set if both operands are finite,
