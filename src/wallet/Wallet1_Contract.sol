@@ -5,13 +5,16 @@ contract ReceiveEther {
     event Deposit(address indexed sender, uint256 amount);
     // Event to log the withdrawal from the contract
     event Withdrawal(address indexed recipient, uint256 amount);
+
     address owner;
-    constructor(){
+
+    constructor() {
         owner = msg.sender;
     }
     // Function to receive Ether happen when u get eth  in the deploy
     // external - u can access it from everywhere
     // payable - it get eth
+
     receive() external payable {
         emit Deposit(msg.sender, msg.value);
     }

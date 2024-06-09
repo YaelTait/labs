@@ -23,20 +23,22 @@ contract ShareTest is Test {
         recipients[2] = 0x5C3B01156A4029D1050Cd35bBB00CE3007B077eB;
 
         // Record initial balances of recipients
-        uint[] memory before = new uint[](3);
+        uint256[] memory before = new uint256[](3);
         before[0] = address(recipients[0]).balance;
         before[1] = address(recipients[1]).balance;
         before[2] = address(recipients[2]).balance;
 
-        uint amount = 90;
+        uint256 amount = 90;
 
         // Distribute funds to recipients
         walletDistributor.distribute(recipients, amount);
 
         // Assert balances after distribution
-        for (uint i = 0; i < recipients.length; i++) {
+        for (uint256 i = 0; i < recipients.length; i++) {
             uint256 amountPerRecipient = amount / recipients.length;
-            assertEq(before[i] + amountPerRecipient, address(recipients[i]).balance, "Incorrect balance after distribution");
+            assertEq(
+                before[i] + amountPerRecipient, address(recipients[i]).balance, "Incorrect balance after distribution"
+            );
         }
     }
 }

@@ -23,14 +23,18 @@ contract GabaimTest is Test {
         payable(address(gabaim)).transfer(depositAmount);
 
         // Assert
-        assertEq(address(gabaim).balance, initialBalance + depositAmount, "Contract balance should increase by deposit amount");
+        assertEq(
+            address(gabaim).balance,
+            initialBalance + depositAmount,
+            "Contract balance should increase by deposit amount"
+        );
     }
 
     // Test withdraw function
     function testWithdraw() public {
         // Arrange
         uint256 withdrawAmount = 50;
-        address pullerAddress = vm.addr(123);   
+        address pullerAddress = vm.addr(123);
         payable(address(gabaim)).transfer(10000);
         uint256 initialBalance = address(gabaim).balance;
         gabaim.setAuthorizedWithdrawer(pullerAddress, 1);
@@ -62,7 +66,7 @@ contract GabaimTest is Test {
     function testWithdrawLessThanZero() public {
         // Arrange
         uint256 withdrawAmount = 0;
-        address pullerAddress = vm.addr(123);   
+        address pullerAddress = vm.addr(123);
         payable(address(gabaim)).transfer(10000);
         uint256 initialBalance = address(gabaim).balance;
         gabaim.setAuthorizedWithdrawer(pullerAddress, 1);
@@ -88,10 +92,10 @@ contract GabaimTest is Test {
     function testSetAuthorizedWithdrawer() public {
         // Arrange
         address withdrawer = address(0x123);
-        
+
         // Act
         gabaim.setAuthorizedWithdrawer(withdrawer, 1);
-        
+
         // Assert
         assertEq(gabaim.getAuthorizedWithdrawer(1), withdrawer, "Authorized withdrawer 1 should be set");
     }

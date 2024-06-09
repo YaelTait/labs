@@ -7,9 +7,8 @@ pragma solidity ^0.8.20;
 import "@hack/libs/ierc20.sol";
 
 contract Lending {
-    
     struct Borrower {
-        uint256 collateralValue; //ETH 
+        uint256 collateralValue; //ETH
         uint256 borrowedValue; //DAI
         uint256 borrowDate;
     }

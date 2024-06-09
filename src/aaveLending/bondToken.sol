@@ -175,12 +175,13 @@ contract BondToken is Ownable, Math {
         return price * 10 ** 10;
     }
 
-    function _utilizationRatio() public view returns (uint256) { // The ratio of Borrowed to deposits
+    function _utilizationRatio() public view returns (uint256) {
+        // The ratio of Borrowed to deposits
         return wdiv(totalBorrowed, totalDeposit);
     }
 
     function _interestMultiplier() public view returns (uint256) {
-        uint256 uRatio = _utilizationRatio();   //The ratio of borrows to deposits
+        uint256 uRatio = _utilizationRatio(); //The ratio of borrows to deposits
         uint256 num = fixedAnnuBorrowRate.sub(baseRate);
         return wdiv(num, uRatio);
     }

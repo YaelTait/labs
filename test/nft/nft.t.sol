@@ -9,15 +9,15 @@ import "forge-std/console.sol";
 contract NFTAuctionTest is Test {
     NFTAuction public nft;
     MyERC721 public erc721;
-    uint public endingBid = 123;
-    uint public startingPrice = 100;
-    uint public tokenId = 1;
+    uint256 public endingBid = 123;
+    uint256 public startingPrice = 100;
+    uint256 public tokenId = 1;
     address public owner = address(123);
 
     function setUp() public {
         // Deploy NFT and ERC721 contracts for testing
         vm.startPrank(owner);
-        nft = new  NFTAuction();
+        nft = new NFTAuction();
         string memory name = "yael";
         string memory symbole = "rachel";
         erc721 = new MyERC721(name, symbole);
