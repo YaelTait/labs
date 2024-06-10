@@ -1,6 +1,5 @@
-contract Func{
-  function _name() internal pure 
-   returns (string memory) {
+contract Func {
+    function _name() internal pure returns (string memory) {
         // Return the name of the contract.
         assembly {
             mstore(0x20, 0x20)

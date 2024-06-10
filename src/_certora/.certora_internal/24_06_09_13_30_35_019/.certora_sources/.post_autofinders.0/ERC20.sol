@@ -49,8 +49,7 @@ contract ERC20 is IERC20, IERC20Metadata {
      * All two of these values are immutable: they can only be set once during
      * construction.
      */
-    constructor() {
-    }
+    constructor() {}
 
     modifier onlyOwner() {
         require(_owner == msg.sender);
@@ -60,7 +59,12 @@ contract ERC20 is IERC20, IERC20Metadata {
     /**
      * @dev Returns the name of the token.
      */
-    function name() public view virtual override returns (string memory) {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00050000, 1037618708485) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00050001, 0) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00050004, 0) }
+    function name() public view virtual override returns (string memory) {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00050000, 1037618708485)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00050001, 0)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00050004, 0)
+        }
         return "";
     }
 
@@ -68,7 +72,12 @@ contract ERC20 is IERC20, IERC20Metadata {
      * @dev Returns the symbol of the token, usually a shorter version of the
      * name.
      */
-    function symbol() public view virtual override returns (string memory) {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00040000, 1037618708484) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00040001, 0) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00040004, 0) }
+    function symbol() public view virtual override returns (string memory) {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00040000, 1037618708484)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00040001, 0)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00040004, 0)
+        }
         return "";
     }
 
@@ -85,27 +94,37 @@ contract ERC20 is IERC20, IERC20Metadata {
      * no way affects any of the arithmetic of the contract, including
      * {IERC20-balanceOf} and {IERC20-transfer}.
      */
-    function decimals() public view virtual override returns (uint8) {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b0000, 1037618708491) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b0001, 0) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b0004, 0) }
+    function decimals() public view virtual override returns (uint8) {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b0000, 1037618708491)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b0001, 0)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b0004, 0)
+        }
         return 18;
     }
 
     /**
      * @dev See {IERC20-totalSupply}.
      */
-    function totalSupply() public view virtual override returns (uint256) {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a0000, 1037618708490) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a0001, 0) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a0004, 0) }
+    function totalSupply() public view virtual override returns (uint256) {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a0000, 1037618708490)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a0001, 0)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a0004, 0)
+        }
         return _totalSupply;
     }
 
     /**
      * @dev See {IERC20-balanceOf}.
      */
-    function balanceOf(address account)
-        public
-        view
-        virtual
-        override
-        returns (uint256)
-    {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000d0000, 1037618708493) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000d0001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000d0005, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000d6000, account) }
+    function balanceOf(address account) public view virtual override returns (uint256) {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000d0000, 1037618708493)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000d0001, 1)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000d0005, 1)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000d6000, account)
+        }
         return _balances[account];
     }
 
@@ -117,12 +136,13 @@ contract ERC20 is IERC20, IERC20Metadata {
      * - `recipient` cannot be the zero address.
      * - the caller must have a balance of at least `amount`.
      */
-    function transfer(address recipient, uint256 amount)
-        public
-        virtual
-        override
-        returns (bool)
-    {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000f0000, 1037618708495) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000f0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000f0005, 9) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000f6001, amount) }
+    function transfer(address recipient, uint256 amount) public virtual override returns (bool) {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000f0000, 1037618708495)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000f0001, 2)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000f0005, 9)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000f6001, amount)
+        }
         _transfer(msg.sender, recipient, amount);
         return true;
     }
@@ -130,13 +150,13 @@ contract ERC20 is IERC20, IERC20Metadata {
     /**
      * @dev See {IERC20-allowance}.
      */
-    function allowance(address owner, address spender)
-        public
-        view
-        virtual
-        override
-        returns (uint256)
-    {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00100000, 1037618708496) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00100001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00100005, 9) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00106001, spender) }
+    function allowance(address owner, address spender) public view virtual override returns (uint256) {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00100000, 1037618708496)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00100001, 2)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00100005, 9)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00106001, spender)
+        }
         return _allowances[owner][spender];
     }
 
@@ -147,12 +167,13 @@ contract ERC20 is IERC20, IERC20Metadata {
      *
      * - `spender` cannot be the zero address.
      */
-    function approve(address spender, uint256 amount)
-        public
-        virtual
-        override
-        returns (bool)
-    {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000e0000, 1037618708494) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000e0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000e0005, 9) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000e6001, amount) }
+    function approve(address spender, uint256 amount) public virtual override returns (bool) {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000e0000, 1037618708494)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000e0001, 2)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000e0005, 9)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000e6001, amount)
+        }
         _approve(msg.sender, spender, amount);
         return true;
     }
@@ -170,16 +191,15 @@ contract ERC20 is IERC20, IERC20Metadata {
      * - the caller must have allowance for ``sender``'s tokens of at least
      * `amount`.
      */
-    function transferFrom(
-        address sender,
-        address recipient,
-        uint256 amount
-    ) public virtual override returns (bool) {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00090000, 1037618708489) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00090001, 3) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00090005, 73) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00096002, amount) }
+    function transferFrom(address sender, address recipient, uint256 amount) public virtual override returns (bool) {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00090000, 1037618708489)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00090001, 3)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00090005, 73)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00096002, amount)
+        }
         uint256 currentAllowance = _allowances[sender][msg.sender];
-        require(
-            currentAllowance >= amount,
-            "ERC20: transfer amount exceeds allowance"
-        ); 
+        require(currentAllowance >= amount, "ERC20: transfer amount exceeds allowance");
         unchecked {
             _approve(sender, msg.sender, currentAllowance - amount);
         }
@@ -201,16 +221,14 @@ contract ERC20 is IERC20, IERC20Metadata {
      *
      * - `spender` cannot be the zero address.
      */
-    function increaseAllowance(address spender, uint256 addedValue)
-        public
-        virtual
-        returns (bool)
-    {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00060000, 1037618708486) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00060001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00060005, 9) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00066001, addedValue) }
-        _approve(
-            msg.sender,
-            spender,
-            _allowances[msg.sender][spender] + addedValue
-        ); 
+    function increaseAllowance(address spender, uint256 addedValue) public virtual returns (bool) {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00060000, 1037618708486)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00060001, 2)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00060005, 9)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00066001, addedValue)
+        }
+        _approve(msg.sender, spender, _allowances[msg.sender][spender] + addedValue);
         return true;
     }
 
@@ -228,13 +246,15 @@ contract ERC20 is IERC20, IERC20Metadata {
      * - `spender` must have allowance for the caller of at least
      * `subtractedValue`.
      */
-    function decreaseAllowance(address spender, uint256 subtractedValue)
-        public
-        virtual
-        returns (bool)
-    {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00070000, 1037618708487) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00070001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00070005, 9) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00076001, subtractedValue) }
+    function decreaseAllowance(address spender, uint256 subtractedValue) public virtual returns (bool) {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00070000, 1037618708487)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00070001, 2)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00070005, 9)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00076001, subtractedValue)
+        }
         uint256 currentAllowance = _allowances[msg.sender][spender];
-        
+
         unchecked {
             _approve(msg.sender, spender, currentAllowance - subtractedValue);
         }
@@ -256,21 +276,20 @@ contract ERC20 is IERC20, IERC20Metadata {
      * - `recipient` cannot be the zero address.
      * - `sender` must have a balance of at least `amount`.
      */
-    function _transfer(
-        address sender,
-        address recipient,
-        uint256 amount
-    ) internal virtual {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00000000, 1037618708480) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00000001, 3) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00000005, 73) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00006002, amount) }
+    function _transfer(address sender, address recipient, uint256 amount) internal virtual {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00000000, 1037618708480)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00000001, 3)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00000005, 73)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00006002, amount)
+        }
         require(sender != address(0), "ERC20: transfer from the zero address");
         require(recipient != address(0), "ERC20: transfer to the zero address");
 
         _beforeTokenTransfer(sender, recipient, amount);
 
         uint256 senderBalance = _balances[sender];
-        require(
-            senderBalance >= amount,
-            "ERC20: transfer amount exceeds balance"
-        ); 
+        require(senderBalance >= amount, "ERC20: transfer amount exceeds balance");
         unchecked {
             _balances[sender] = senderBalance - amount;
         }
@@ -281,7 +300,8 @@ contract ERC20 is IERC20, IERC20Metadata {
         _afterTokenTransfer(sender, recipient, amount);
     }
 
-    /** @dev Creates `amount` tokens and assigns them to `account`, increasing
+    /**
+     * @dev Creates `amount` tokens and assigns them to `account`, increasing
      * the total supply.
      *
      * Emits a {Transfer} event with `from` set to the zero address.
@@ -290,7 +310,7 @@ contract ERC20 is IERC20, IERC20Metadata {
      *
      * - `account` cannot be the zero address.
      */
-    function mint(address account, uint256 amount) logInternal8(amount)onlyOwner() public virtual override {
+    function mint(address account, uint256 amount) public virtual override logInternal8(amount) onlyOwner {
         require(account != address(0), "ERC20: mint to the zero address");
 
         _beforeTokenTransfer(address(0), account, amount);
@@ -300,7 +320,17 @@ contract ERC20 is IERC20, IERC20Metadata {
         emit Transfer(address(0), account, amount);
 
         _afterTokenTransfer(address(0), account, amount);
-    }modifier logInternal8(uint256 amount) { assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00080000, 1037618708488) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00080001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00080005, 9) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00086001, amount) } _; }
+    }
+
+    modifier logInternal8(uint256 amount) {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00080000, 1037618708488)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00080001, 2)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00080005, 9)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00086001, amount)
+        }
+        _;
+    }
 
     /**
      * @dev Destroys `amount` tokens from `account`, reducing the
@@ -313,7 +343,7 @@ contract ERC20 is IERC20, IERC20Metadata {
      * - `account` cannot be the zero address.
      * - `account` must have at least `amount` tokens.
      */
-    function burn(address account, uint256 amount) logInternal12(amount)onlyOwner() public virtual override {
+    function burn(address account, uint256 amount) public virtual override logInternal12(amount) onlyOwner {
         require(account != address(0), "ERC20: burn from the zero address");
 
         _beforeTokenTransfer(account, address(0), amount);
@@ -328,7 +358,17 @@ contract ERC20 is IERC20, IERC20Metadata {
         emit Transfer(account, address(0), amount);
 
         _afterTokenTransfer(account, address(0), amount);
-    }modifier logInternal12(uint256 amount) { assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000c0000, 1037618708492) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000c0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000c0005, 9) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000c6001, amount) } _; }
+    }
+
+    modifier logInternal12(uint256 amount) {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000c0000, 1037618708492)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000c0001, 2)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000c0005, 9)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000c6001, amount)
+        }
+        _;
+    }
 
     /**
      * @dev Sets `amount` as the allowance of `spender` over the `owner` s tokens.
@@ -343,11 +383,13 @@ contract ERC20 is IERC20, IERC20Metadata {
      * - `owner` cannot be the zero address.
      * - `spender` cannot be the zero address.
      */
-    function _approve(
-        address owner,
-        address spender,
-        uint256 amount
-    ) internal virtual {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00010000, 1037618708481) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00010001, 3) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00010005, 73) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00016002, amount) }
+    function _approve(address owner, address spender, uint256 amount) internal virtual {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00010000, 1037618708481)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00010001, 3)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00010005, 73)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00016002, amount)
+        }
         require(owner != address(0), "ERC20: approve from the zero address");
         require(spender != address(0), "ERC20: approve to the zero address");
         _allowances[owner][spender] = amount;
@@ -368,11 +410,14 @@ contract ERC20 is IERC20, IERC20Metadata {
      *
      * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
      */
-    function _beforeTokenTransfer(
-        address from,
-        address to,
-        uint256 amount
-    ) internal virtual {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00020000, 1037618708482) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00020001, 3) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00020005, 73) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00026002, amount) }}
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00020000, 1037618708482)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00020001, 3)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00020005, 73)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00026002, amount)
+        }
+    }
 
     /**
      * @dev Hook that is called after any transfer of tokens. This includes
@@ -388,11 +433,14 @@ contract ERC20 is IERC20, IERC20Metadata {
      *
      * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
      */
-    function _afterTokenTransfer(
-        address from,
-        address to,
-        uint256 amount
-    ) internal virtual {assembly ("memory-safe") { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00030000, 1037618708483) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00030001, 3) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00030005, 73) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00036002, amount) }}
+    function _afterTokenTransfer(address from, address to, uint256 amount) internal virtual {
+        assembly ("memory-safe") {
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00030000, 1037618708483)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00030001, 3)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00030005, 73)
+            mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00036002, amount)
+        }
+    }
 
     function deposit() external payable {
         _balances[msg.sender] += msg.value;
@@ -401,7 +449,7 @@ contract ERC20 is IERC20, IERC20Metadata {
     function withdraw(uint256 amount) external {
         require(amount <= _balances[msg.sender]);
         _balances[msg.sender] -= amount;
-        (bool success, ) = msg.sender.call{value: amount}("");
+        (bool success,) = msg.sender.call{value: amount}("");
         require(success);
     }
 }
